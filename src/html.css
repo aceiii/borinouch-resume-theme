@@ -66,9 +66,14 @@ span.fa
 
 hr {
   margin-top: 20px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
   border: 0;
   border-top: 1px solid #eee;
+}
+
+body.pdf hr {
+  margin-top: 24px;
+  margin-bottom: 32px;
 }
 
 .tenure, .keywords {
@@ -263,7 +268,7 @@ h1, .label {
 }
 
 #container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -306,6 +311,13 @@ body.pdf header .label {
   clear: right;
   width: 30%;
   margin-left: 2em;
+  margin-bottom: 5em;
   z-index: 1;
 }
+
+#container > #skills > header span.fa {
+  top: 50px;
+}
+
+
 
