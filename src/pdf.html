@@ -3,66 +3,193 @@
   <head>
     <meta charset="utf-8">
     <title>{{ RAW.name }}</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     {{{styleSheet "html.css"}}}
   </head>
-  <body>
-    <main>
-      <header>
-        <h1>{{{ r.name }}}</h1>
-        <div id="contact">
-          {{#has 'contact.email'}}<div class="email"><a href="mailto:{{{ RAW.contact.email }}}">{{ RAW.contact.email }}</a></div>{{/has}}
-          {{#has 'contact.phone'}}<div class="phone">{{ RAW.contact.phone }}</div>{{/has}}
-          {{#has 'contact.website'}}<div class="website"><a href="{{{ RAW.contact.website }}}">{{trimURL RAW.contact.website }}</a></div>{{/has}}
+  <body class="pdf">
+    <main id="main">
+      <div id="container">
+        <header>
+          <div class="float-left">
+            <h1>{{{ r.name }}}</h1>
+            <span class="label">{{{ r.info.label }}}</span>
+          </div>
+          <p id="contact">
+            {{#if r.contact.email}}
+              <span class="email">
+                <i class="fa fa-envelope"></i>
+                <a href="mailto:{{ RAW.contact.email }}">{{{ r.contact.email }}}</a>
+              </span>
+            {{/if}}
+            {{#if r.contact.phone}}
+              <span class="phone"><i class="fa fa-mobile"></i> {{{ r.contact.phone }}}</span>
+            {{/if}}
+            {{#if r.contact.website}}
+              <span class="website">
+                <i class="fa fa-link"></i>
+                <a href="{{ RAW.contact.website }}">{{{ r.contact.website }}}</a>
+              </span>
+            {{/if}}
+          </p>
+        </header>
+
+{{#*inline "icon-info"}}<span class="fa fa-lg fa-info"></span>{{/inline}}
+{{> section/info _icon="icon-info" }}
+
+
+{{#section 'skills' }}
+<section id="skills">
+  <hr>
+  <header>
+    <h2>{{{sectionTitle "Skills"}}}</h2>
+  </header>
+  <ul class="list-unstyled">
+    {{#each r.skills.sets}}
+      <li class="card card-nested card-skills">
+        <div class="skill-level" rel="tooltip" title="{{ level }}" data-placement="left">
+          <div class="skill-progress {{toLower level }}"></div>
         </div>
-      </header>
-
-
-
-{{#has "info.brief"}}
-<section id="summary">
-  {{{ r.info.brief }}}
+        <div class="skill-info">
+          <strong>{{ name }}</strong>
+          <div class="space-top labels">
+            {{#if skills}}
+              {{#each skills}}
+                <span class="label label-keyword">{{ this }}</span>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
 </section>
-{{/has}}
+{{/section}}
+
+{{#*inline "icon-employment"}}<span class="fa fa-lg fa-building"></span>{{/inline}}
+
+{{#*inline "body-employment" }}
+<div>
+  <h3><em>{{ position }}</em>
+    {{#if url }}
+      <a href="{{{ url }}}">{{ employer }}</a>
+    {{else}}
+      {{ employer }}
+    {{/if}}
+    </h3>
+    <div class="sub-title">
+      <span class="tenure">{{dateRange .}}</span>
+      {{#if keywords}}
+        {{#if start}}| {{/if}}<span class="keywords">{{#each keywords}}{{{ . }}} {{/each}}</span>
+      {{/if}}
+    </div>
+  <p>{{{ summary }}}</p>
+  {{> highlights }}
+</div>
+{{/inline}}
 
 
-
-{{!<!--
-  Use predefined global partials for the other sections.
-
-  The "inline" bit before each section allows us to pass a custom heading
-  icon into the global partial. For this theme, we're using Font Awesome.
--->}}
-
-{{> section/skills }}
-
-{{> section/employment }}
-
-{{> section/projects }}
-
-{{> section/governance }}
-
-{{> section/education }}
-
-{{> section/affiliation }}
-
-{{> section/service }}
-
-{{> section/samples }}
-
-{{> section/writing }}
-
-{{> section/reading }}
-
-{{> section/recognition }}
-
-{{> section/speaking }}
-
-{{> section/references }}
-
-{{> section/interests }}
+{{> section/employment _icon="icon-employment"}}
 
 
+{{#*inline "body-projects" }}
+<div>
+  <h3>{{#if role}}<em>{{camelCase role }}</em>{{/if}}
+    {{#if url}}
+      <a href="{{{ url }}}">{{ title }}</a>
+    {{else}}
+      {{ title }}
+    {{/if}}
+  </h3>
+  <div class="sub-title">
+    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
+    {{#if keywords}}
+      {{#if start}}| {{/if}}<span class="keywords">{{#each keywords}}{{{ . }}} {{/each}}</span>
+    {{/if}}
+  </div>
+  {{{ summary }}}
+  {{> highlights }}
+</div>
+{{/inline}}
 
+{{#*inline "icon-projects"}}<span class="fa fa-lg fa-star"></span>{{/inline}}
+
+{{> section/projects _icon="icon-projects"}}
+
+
+{{#*inline "body-education" }}
+<div>
+  <h3>{{#if title}}<em>{{ title }}</em>{{/if}}
+    {{#if url}}
+      <a href="{{{ url }}}">{{ institution }}</a>
+    {{else}}
+      {{ institution }}
+    {{/if}}
+  </h3>
+  <div class="sub-title">
+    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
+    {{#if curriculum}}
+      {{#if start}}| {{/if}}<span class="keywords">{{#each curriculum}}{{{ . }}} {{/each}}</span>
+    {{/if}}
+  </div>
+  {{> highlights }}
+</div>
+{{/inline}}
+
+{{#*inline "icon-education"}}<span class="fa fa-lg fa-mortar-board"></span>{{/inline}}
+
+{{> section/education _icon="icon-education"}}
+
+
+{{#*inline "body-governance" }}
+<div>
+  <h3>{{#if role}}<em>{{{ role }}}</em>{{/if}}
+    {{#if url}}
+      <a href="{{{ url }}}">{{{ organization }}}</a>
+    {{else}}
+      {{{ organization }}}
+    {{/if}}
+  </h3>
+  <div class="sub-title">
+    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
+    {{#if keywords}}
+      {{#if start}}| {{/if}}<span class="keywords">{{#each keywords}}{{{ . }}} {{/each}}</span>
+    {{/if}}
+  </div>
+  {{{ summary }}}
+  {{> highlights }}
+</div>
+{{/inline}}
+
+{{#*inline "icon-governance"}}<span class="fa fa-lg fa-balance-scale"></span>{{/inline}}
+
+{{> section/governance _icon="icon-governance"}}
+
+
+{{#*inline "icon-service"}}<span class="fa fa-lg fa-child"></span>{{/inline}}
+{{#*inline "icon-affiliation"}}<span class="fa fa-lg fa-share-alt"></span>{{/inline}}
+{{#*inline "icon-samples"}}<span class="fa fa-lg fa-share"></span>{{/inline}}
+{{#*inline "icon-writing"}}<span class="fa fa-lg fa-pencil"></span>{{/inline}}
+{{#*inline "icon-reading"}}<span class="fa fa-lg fa-book"></span>{{/inline}}
+{{#*inline "icon-recognition"}}<span class="fa fa-lg fa-trophy"></span>{{/inline}}
+{{#*inline "icon-speaking"}}<span class="fa fa-lg fa-users"></span>{{/inline}}
+{{#*inline "icon-testimonials"}}<span class="fa fa-lg fa-quote-left"></span>{{/inline}}
+{{#*inline "icon-references"}}<span class="fa fa-lg fa-thumbs-o-up"></span>{{/inline}}
+{{#*inline "icon-interests"}}<span class="fa fa-lg fa-bicycle"></span>{{/inline}}
+
+
+{{> section/service _icon="icon-service"}}
+{{> section/affiliation _icon="icon-affiliation"}}
+{{> section/samples _icon="icon-samples"}}
+{{> section/writing _icon="icon-writing"}}
+{{> section/reading _icon="icon-reading"}}
+{{> section/recognition _icon="icon-recognition"}}
+{{> section/speaking _icon="icon-speaking"}}
+{{> section/testimonials _icon="icon-testimonials"}}
+{{> section/references _icon="icon-references"}}
+{{> section/interests _icon="icon-interests"}}
+
+      </div>
     </main>
   </body>
 </html>
