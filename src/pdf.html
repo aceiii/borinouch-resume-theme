@@ -89,8 +89,33 @@
 </div>
 {{/inline}}
 
-
 {{> section/employment _icon="icon-employment"}}
+
+<P style="page-break-before: always"></P>
+
+{{#*inline "body-education" }}
+<div>
+  <h3>{{#if title}}<em>{{ title }}</em>{{/if}}
+    {{#if url}}
+      <a href="{{{ url }}}">{{ institution }}</a>
+    {{else}}
+      {{ institution }}
+    {{/if}}
+  </h3>
+  <div class="sub-title">
+    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
+    {{#if curriculum}}
+      {{#if start}}| {{/if}}<span class="keywords">{{#each curriculum}}{{{ . }}} {{/each}}</span>
+    {{/if}}
+  </div>
+  {{> highlights }}
+</div>
+{{/inline}}
+
+{{#*inline "icon-education"}}<span class="fa fa-lg fa-mortar-board"></span>{{/inline}}
+
+{{> section/education _icon="icon-education"}}
+
 
 
 {{#*inline "body-projects" }}
@@ -116,30 +141,6 @@
 {{#*inline "icon-projects"}}<span class="fa fa-lg fa-star"></span>{{/inline}}
 
 {{> section/projects _icon="icon-projects"}}
-
-
-{{#*inline "body-education" }}
-<div>
-  <h3>{{#if title}}<em>{{ title }}</em>{{/if}}
-    {{#if url}}
-      <a href="{{{ url }}}">{{ institution }}</a>
-    {{else}}
-      {{ institution }}
-    {{/if}}
-  </h3>
-  <div class="sub-title">
-    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
-    {{#if curriculum}}
-      {{#if start}}| {{/if}}<span class="keywords">{{#each curriculum}}{{{ . }}} {{/each}}</span>
-    {{/if}}
-  </div>
-  {{> highlights }}
-</div>
-{{/inline}}
-
-{{#*inline "icon-education"}}<span class="fa fa-lg fa-mortar-board"></span>{{/inline}}
-
-{{> section/education _icon="icon-education"}}
 
 
 {{#*inline "body-governance" }}
@@ -176,8 +177,7 @@
 {{#*inline "icon-speaking"}}<span class="fa fa-lg fa-users"></span>{{/inline}}
 {{#*inline "icon-testimonials"}}<span class="fa fa-lg fa-quote-left"></span>{{/inline}}
 {{#*inline "icon-references"}}<span class="fa fa-lg fa-thumbs-o-up"></span>{{/inline}}
-{{#*inline "icon-interests"}}<span class="fa fa-lg fa-bicycle"></span>{{/inline}}
-
+<!-- {{#*inline "icon-interests"}}<span class="fa fa-lg fa-bicycle"></span>{{/inline}} -->
 
 {{> section/service _icon="icon-service"}}
 {{> section/affiliation _icon="icon-affiliation"}}
@@ -188,7 +188,28 @@
 {{> section/speaking _icon="icon-speaking"}}
 {{> section/testimonials _icon="icon-testimonials"}}
 {{> section/references _icon="icon-references"}}
-{{> section/interests _icon="icon-interests"}}
+<!-- {{> section/interests _icon="icon-interests"}} -->
+
+{{#*inline "interests" }}
+<!-- {{#section 'interests' }} -->
+<section id="interests">
+  <hr>
+  <header>
+    <span class="fa fa-lg fa-code"></span>
+    <h2>{{{sectionTitle "Interests"}}}</h2>
+  </header>
+  <ul class="list-unstyled">
+    {{#each r.interests}}
+      <li class="card card-nested card-references">
+        {{{ name }}}
+      </li>
+    {{/each}}
+  </ul>
+</section>
+<!-- {{/section}} -->
+{{/inline}}
+
+<!-- {{> section/interests _icon="icon-interests"}} -->
 
       </div>
     </main>
