@@ -13,7 +13,7 @@
         <header>
           <div class="float-left">
             <h1>{{{ r.name }}}</h1>
-            <span class="label">{{{ r.info.label }}}</span>
+            <span class="label nowrap">{{{ r.info.label }}}</span>
           </div>
           <p id="contact">
             {{#if r.contact.email}}
@@ -61,6 +61,23 @@
             {{/if}}
           </div>
         </div>
+      </li>
+    {{/each}}
+  </ul>
+</section>
+{{/section}}
+
+{{#section 'interests' }}
+<section id="interests">
+  <hr>
+  <header>
+    <span class="fa fa-lg fa-bicycle"></span>
+    <h2>{{{sectionTitle "Interests"}}}</h2>
+  </header>
+  <ul class="list-unstyled">
+    {{#each r.interests}}
+      <li class="label label-keyword nowrap">
+        {{{ name }}}
       </li>
     {{/each}}
   </ul>
@@ -117,6 +134,7 @@
 
 {{> section/projects _icon="icon-projects"}}
 
+<p style="break-after: always"></p>
 
 {{#*inline "body-education" }}
 <div>
@@ -140,6 +158,30 @@
 {{#*inline "icon-education"}}<span class="fa fa-lg fa-mortar-board"></span>{{/inline}}
 
 {{> section/education _icon="icon-education"}}
+
+<p style="break-after: always"></p>
+
+{{#section "certificates" }}
+<hr>
+<section id="certificates">
+<header>
+    <span class="fa fa-lg fa-certificate"></span>
+    <h2>{{{sectionTitle "Certificates"}}}</h2>
+  </header>
+  {{#each r.certificates}}
+    <div>
+      <h3>{{#if name}}<em>{{ name }}</em>{{/if}}
+        {{#if issuer}}
+        <a href="{{{ url }}}">{{ issuer }}</a>
+        {{/if}}
+      </h3>
+      <div class="sub-title">
+        {{#if date}}<span class="tenure">Isused: {{date date}}</span>{{/if}}
+      </div>
+    </div>
+  {{/each}}
+</section>
+{{/section}}
 
 
 {{#*inline "body-governance" }}
@@ -176,7 +218,7 @@
 {{#*inline "icon-speaking"}}<span class="fa fa-lg fa-users"></span>{{/inline}}
 {{#*inline "icon-testimonials"}}<span class="fa fa-lg fa-quote-left"></span>{{/inline}}
 {{#*inline "icon-references"}}<span class="fa fa-lg fa-thumbs-o-up"></span>{{/inline}}
-{{#*inline "icon-interests"}}<span class="fa fa-lg fa-bicycle"></span>{{/inline}}
+<!-- {{#*inline "icon-interests"}}<span class="fa fa-lg fa-bicycle"></span>{{/inline}} -->
 
 
 {{> section/service _icon="icon-service"}}
@@ -188,7 +230,7 @@
 {{> section/speaking _icon="icon-speaking"}}
 {{> section/testimonials _icon="icon-testimonials"}}
 {{> section/references _icon="icon-references"}}
-{{> section/interests _icon="icon-interests"}}
+<!-- {{> section/interests _icon="icon-interests"}} -->
 
       </div>
     </main>

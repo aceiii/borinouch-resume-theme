@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #003b66;
+}
+
 main {
   display: block;
 }
@@ -19,7 +23,7 @@ body {
 
 body.pdf {
   background-color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 li {
@@ -61,7 +65,7 @@ span.fa
   top: 4px;
   left: -50px;
   font-size: 2em;
-  color: #bfc1c3;
+  color: #003b66;
 }
 
 hr {
@@ -76,6 +80,10 @@ body.pdf hr {
   margin-bottom: 24px;
 }
 
+.nowrap {
+    white-space: nowrap !important;
+}
+
 .tenure, .keywords {
   font-size: 75%;
 }
@@ -85,7 +93,7 @@ body.pdf hr {
 }
 
 .keywords {
-  color: silver;
+  color: gray;
 }
 
 .clear {
@@ -93,13 +101,13 @@ body.pdf hr {
 }
 
 h1 {
-  color: steelblue;
+  color: #003b66;
   margin: 0;
 }
 
 h2 {
   font-size: 1.6em;
-  color: #bfc1c3;
+  color: #003b66;
   text-transform: uppercase;
   font-weight: normal;
 }
@@ -110,7 +118,7 @@ h3 {
 }
 
 a, a:visited {
-  color: #428bca;
+  color: #003b66;
   text-decoration: none;
   font-weight: bold;
 }
@@ -150,7 +158,7 @@ h1, .label {
 #contact > span {
   display: block;
   font-weight: 300;
-  color: steelblue;
+  color: #003b66;
 }
 
 #contact > span > a {
@@ -158,7 +166,7 @@ h1, .label {
 }
 
 #contact > span .fa {
-  color: #bfc1c3;
+  color: #003b66;
   width: 32px;
   text-align: center;
 }
@@ -185,7 +193,7 @@ h1, .label {
 
 .label-keyword {
   display: inline-block;
-  background: #7eb0db;
+  background: #003b66;
   color: white;
   font-size: 0.75em;
   font-weight: 400;
@@ -235,7 +243,7 @@ h1, .label {
 }
 .skill-level .skill-progress.advanced {
   height: 80%;
-  background: #428bca;
+  background: #003b66;
 }
 .skill-level .skill-progress.master {
   height: 95%;
@@ -274,8 +282,8 @@ h1, .label {
 
 #elevator-pitch {
   text-align: center;
-  font-size: 2em
-  color: #bfc1c3;
+  font-size: 2em;
+  color: #003b66;
   text-transform: uppercase;
   font-weight: normal;
 }
@@ -289,7 +297,7 @@ h1, .label {
 }
 
 header .label {
-  color: #bfc1c3;
+  color: #5c5d69; /*#003b66;*/
   font-size: 2em;
   font-weight: 300;
 }
@@ -306,18 +314,17 @@ body.pdf header .label {
   clear: both;
 }
 
-#container > #skills {
+#container > #skills,
+#container > #interests {
   float: right;
   clear: right;
-  width: 30%;
-  margin-left: 2em;
-  margin-bottom: 5em;
+  width: 25%;
+  margin-left: 4em;
+  /* margin-bottom: 5em; */
   z-index: 1;
 }
 
-#container > #skills > header span.fa {
+#container > #skills > header span.fa,
+#container > #interests > header span.fa {
   top: 50px;
 }
-
-
-

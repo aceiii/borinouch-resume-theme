@@ -13,7 +13,7 @@
         <header>
           <div class="float-left">
             <h1>{{{ r.name }}}</h1>
-            <span class="label">{{{ r.info.label }}}</span>
+            <span class="label nowrap">{{{ r.info.label }}}</span>
           </div>
           <p id="contact">
             {{#if r.contact.email}}
@@ -67,6 +67,23 @@
 </section>
 {{/section}}
 
+{{#section 'interests' }}
+<section id="interests">
+  <hr>
+  <header>
+    <span class="fa fa-lg fa-bicycle"></span>
+    <h2>{{{sectionTitle "Interests"}}}</h2>
+  </header>
+  <ul class="list-unstyled">
+    {{#each r.interests}}
+      <li class="label label-keyword nowrap">
+        {{{ name }}}
+      </li>
+    {{/each}}
+  </ul>
+</section>
+{{/section}}
+
 {{#*inline "icon-employment"}}<span class="fa fa-lg fa-building"></span>{{/inline}}
 
 {{#*inline "body-employment" }}
@@ -89,33 +106,8 @@
 </div>
 {{/inline}}
 
+
 {{> section/employment _icon="icon-employment"}}
-
-<P style="page-break-before: always"></P>
-
-{{#*inline "body-education" }}
-<div>
-  <h3>{{#if title}}<em>{{ title }}</em>{{/if}}
-    {{#if url}}
-      <a href="{{{ url }}}">{{ institution }}</a>
-    {{else}}
-      {{ institution }}
-    {{/if}}
-  </h3>
-  <div class="sub-title">
-    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
-    {{#if curriculum}}
-      {{#if start}}| {{/if}}<span class="keywords">{{#each curriculum}}{{{ . }}} {{/each}}</span>
-    {{/if}}
-  </div>
-  {{> highlights }}
-</div>
-{{/inline}}
-
-{{#*inline "icon-education"}}<span class="fa fa-lg fa-mortar-board"></span>{{/inline}}
-
-{{> section/education _icon="icon-education"}}
-
 
 
 {{#*inline "body-projects" }}
@@ -141,6 +133,55 @@
 {{#*inline "icon-projects"}}<span class="fa fa-lg fa-star"></span>{{/inline}}
 
 {{> section/projects _icon="icon-projects"}}
+
+<p style="break-after: auto"></p>
+
+{{#*inline "body-education" }}
+<div>
+  <h3>{{#if title}}<em>{{ title }}</em>{{/if}}
+    {{#if url}}
+      <a href="{{{ url }}}">{{ institution }}</a>
+    {{else}}
+      {{ institution }}
+    {{/if}}
+  </h3>
+  <div class="sub-title">
+    {{#if start}}<span class="tenure">{{dateRange .}}</span>{{/if}}
+    {{#if curriculum}}
+      {{#if start}}| {{/if}}<span class="keywords">{{#each curriculum}}{{{ . }}} {{/each}}</span>
+    {{/if}}
+  </div>
+  {{> highlights }}
+</div>
+{{/inline}}
+
+{{#*inline "icon-education"}}<span class="fa fa-lg fa-mortar-board"></span>{{/inline}}
+
+{{> section/education _icon="icon-education"}}
+
+<p style="break-before: always"></p>
+
+{{#section "certificates" }}
+<hr>
+<section id="certificates">
+<header>
+    <span class="fa fa-lg fa-certificate"></span>
+    <h2>{{{sectionTitle "Certificates"}}}</h2>
+  </header>
+  {{#each r.certificates}}
+    <div>
+      <h3>{{#if name}}<em>{{ name }}</em>{{/if}}
+        {{#if issuer}}
+        <a href="{{{ url }}}">{{ issuer }}</a>
+        {{/if}}
+      </h3>
+      <div class="sub-title">
+        {{#if date}}<span class="tenure">Isused: {{date date}}</span>{{/if}}
+      </div>
+    </div>
+  {{/each}}
+</section>
+{{/section}}
 
 
 {{#*inline "body-governance" }}
@@ -179,6 +220,7 @@
 {{#*inline "icon-references"}}<span class="fa fa-lg fa-thumbs-o-up"></span>{{/inline}}
 <!-- {{#*inline "icon-interests"}}<span class="fa fa-lg fa-bicycle"></span>{{/inline}} -->
 
+
 {{> section/service _icon="icon-service"}}
 {{> section/affiliation _icon="icon-affiliation"}}
 {{> section/samples _icon="icon-samples"}}
@@ -188,27 +230,6 @@
 {{> section/speaking _icon="icon-speaking"}}
 {{> section/testimonials _icon="icon-testimonials"}}
 {{> section/references _icon="icon-references"}}
-<!-- {{> section/interests _icon="icon-interests"}} -->
-
-{{#*inline "interests" }}
-<!-- {{#section 'interests' }} -->
-<section id="interests">
-  <hr>
-  <header>
-    <span class="fa fa-lg fa-code"></span>
-    <h2>{{{sectionTitle "Interests"}}}</h2>
-  </header>
-  <ul class="list-unstyled">
-    {{#each r.interests}}
-      <li class="card card-nested card-references">
-        {{{ name }}}
-      </li>
-    {{/each}}
-  </ul>
-</section>
-<!-- {{/section}} -->
-{{/inline}}
-
 <!-- {{> section/interests _icon="icon-interests"}} -->
 
       </div>
